@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 
 @Component({
@@ -47,7 +47,25 @@ import { Component } from '@angular/core';
         style({ 'transform': 'translateX(-100%)' }),
         animate(2000)
       ])
-    ])
+    ]),
+    trigger('cambiaColor4', [
+      state('rojo', style({
+        'background-color': 'red'
+      })),
+      state('amarillo', style({
+        'background-color': 'yellow'
+      })),
+      state('verde', style({
+        'background-color': 'green'
+      })),
+      transition('void => *', [
+        animate(2000, keyframes([
+          style({ opacity: 0, transform: 'translateX(-100%)', offset: 0 }), //offset es para indicar en que % de la animacion se aplican los styles
+          style({ opacity: 0.5, transform: 'translateX(100px)', offset: 0.5 }),
+          style({ opacity: 1, transform: 'translateX(0)', offset: 1 })
+        ]))
+      ])
+    ]),
   ]
 })
 export class AppComponent {
